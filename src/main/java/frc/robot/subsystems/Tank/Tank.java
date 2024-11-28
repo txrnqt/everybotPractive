@@ -2,9 +2,9 @@ package frc.robot.subsystems.Tank;
 
 
 import org.littletonrobotics.junction.Logger;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 public class Tank extends SubsystemBase {
     private TankIO io;
@@ -27,9 +27,9 @@ public class Tank extends SubsystemBase {
         io.setPower(leftPower, rightPower);
     }
 
-    public Command tankCMD(XboxController controller) {
+    public Command tankCMD(CommandXboxController driver) {
         return run(() -> {
-            setPower(controller.getLeftY(), controller.getRightY());
+            setPower(driver.getLeftY(), driver.getRightY());
         });
     }
 }
