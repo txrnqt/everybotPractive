@@ -8,6 +8,9 @@ public class BallReal implements BallIO {
 
     public BallReal() {}
 
+    /**
+     * sets power for motors
+     */
     public void setPower(double power) {
         ballMotor.set(power);
     }
