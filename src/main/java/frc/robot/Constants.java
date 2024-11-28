@@ -29,5 +29,10 @@ public final class Constants {
     public static final class Pneumatics {
     }
 
+    public static final class Tank {
+        public static final edu.wpi.first.wpilibj.SPI.Port navXID =
+            edu.wpi.first.wpilibj.SPI.Port.kMXP;
+        public static final boolean isFeildRelative = true;
+    }
 
 }
