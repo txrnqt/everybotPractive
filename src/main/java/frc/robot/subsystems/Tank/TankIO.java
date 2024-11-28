@@ -6,9 +6,26 @@ public interface TankIO {
 
     @AutoLog
     public class TankIOInputs {
-        public double tankPositionRad = 0.0;
-        public double tankVelocityRadPerSec = 0.0;
-        public double tankAppliedVolts = 0.0;
+        /**
+         * right motor data
+         */
+        public double tankRightLeadPositionRad;
+        public double tankRightLeadVelocityRadPerSec;
+        public double tankRightLeadAppliedVolts;
+
+        /**
+         * left motor data
+         */
+        public double tankLeftLeadPositionRad;
+        public double tankLeftLeadVelocityRadPerSec;
+        public double tankLeftLeadAppliedVolts;
+
+        /**
+         * gyro data
+         */
+        public static float yaw;
+        public static float pitch;
+        public static float roll;
     }
 
     public default void updateInputs(TankIOInputs inputs) {}

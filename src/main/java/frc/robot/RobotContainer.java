@@ -8,6 +8,9 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Robot.RobotRunType;
+import frc.robot.subsystems.Tank.Tank;
+import frc.robot.subsystems.Tank.TankIO;
+import frc.robot.subsystems.Tank.TankReal;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -24,7 +27,7 @@ public class RobotContainer {
     private final SendableChooser<String> autoChooser = new SendableChooser<>();
 
     /* Subsystems */
-
+    private Tank tank;
 
 
     /**
@@ -34,10 +37,10 @@ public class RobotContainer {
 
         switch (runtimeType) {
             case kReal:
-
+                tank = new Tank(new TankReal());
                 break;
             case kSimulation:
-                // drivetrain = new Drivetrain(new DrivetrainSim() {});
+                tank = new Tank(new TankIO() {});
                 break;
             default:
 
@@ -52,7 +55,9 @@ public class RobotContainer {
      * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
      * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
-    private void configureButtonBindings() {}
+    private void configureButtonBindings() {
+        tank.setDefaultCommand(tank.tankCMD(driver));
+    }
 
     /**
      * Gets the user's selected autonomous command.
