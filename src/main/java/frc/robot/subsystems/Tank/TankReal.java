@@ -48,13 +48,13 @@ public class TankReal implements TankIO {
 
     public void periodic() {}
 
-    public void updateInputs() {
+    public void updateInputs(TankIOInputs inputs) {
         /**
          * gets gyro data
          */
-        TankIOInputs.yaw = gyro.getYaw();
-        TankIOInputs.roll = gyro.getRoll();
-        TankIOInputs.pitch = gyro.getPitch();
+        inputs.yaw = gyro.getYaw();
+        inputs.roll = gyro.getRoll();
+        inputs.pitch = gyro.getPitch();
 
         /**
          * refreshs motor data
