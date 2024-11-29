@@ -6,7 +6,6 @@ public interface BallIO {
 
     @AutoLog
     public class BallIOInputs {
-        public double d;
     }
 
     public default void updateInputs(BallIOInputs inputs) {}

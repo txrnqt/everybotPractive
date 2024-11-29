@@ -3,6 +3,7 @@ package frc.robot.subsystems.Tank;
 import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.kauailabs.navx.frc.AHRS;
 import frc.robot.Constants;
 
@@ -14,6 +15,7 @@ public class TankReal implements TankIO {
     private final TalonFX tankFrontLeftLead = new TalonFX(2);
     private final TalonFX tankBackRightFollow = new TalonFX(5);
     private final TalonFX tankBackLeftFollow = new TalonFX(3);
+
     private final AHRS gyro = new AHRS(Constants.Tank.navXID);
     private final StatusSignal<Double> tankRightLeadPositon;
     private final StatusSignal<Double> tankRightLeadVelocity;
@@ -39,8 +41,24 @@ public class TankReal implements TankIO {
         tankLeftLeadVelocity = tankFrontLeftLead.getVelocity();
         tankLeftLeadVoltage = tankFrontLeftLead.getMotorVoltage();
 
+        /**
+         * sets motor to netural mode
+         */
+        tankFrontLeftLead.setNeutralMode(NeutralModeValue.Brake);
+        tankFrontRightLead.setNeutralMode(NeutralModeValue.Brake);
+        tankBackLeftFollow.setNeutralMode(NeutralModeValue.Brake);
+        tankBackRightFollow.setNeutralMode(NeutralModeValue.Brake);
+
+        /**
+         * reset encoders
+         */
+
     }
 
+
+    /**
+     * sets motor power
+     */
     public void setPower(double powerLeft, double powerRight) {
         tankBackLeftFollow.set(powerLeft);
         tankBackRightFollow.set(powerRight);
