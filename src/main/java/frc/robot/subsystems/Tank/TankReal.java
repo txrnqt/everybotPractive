@@ -42,6 +42,11 @@ public class TankReal implements TankIO {
         tankLeftLeadVoltage = tankFrontLeftLead.getMotorVoltage();
 
         /**
+         * change to closed loop
+         */
+        tankFrontLeftLead.getConfigurator().apply();
+
+        /**
          * sets motor to netural mode
          */
         tankFrontLeftLead.setNeutralMode(NeutralModeValue.Brake);

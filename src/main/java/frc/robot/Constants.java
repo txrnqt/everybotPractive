@@ -35,4 +35,9 @@ public final class Constants {
         public static final boolean isFeildRelative = true;
     }
 
+    public static final class Ball {
+        public static final int BEAMBREAK1 = 0;
+        public static final int BEAMBREAK2 = 1;
+        public static final int BALLMOTOR = 12;
+    }
 }

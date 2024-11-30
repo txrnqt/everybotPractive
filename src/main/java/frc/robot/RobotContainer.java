@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Robot.RobotRunType;
+import frc.robot.subsystems.LEDs;
 import frc.robot.subsystems.Tank.Tank;
 import frc.robot.subsystems.Tank.TankIO;
 import frc.robot.subsystems.Tank.TankReal;
@@ -28,6 +29,7 @@ public class RobotContainer {
 
     /* Subsystems */
     private Tank tank;
+    private LEDs leds = new LEDs(9, 100);
 
 
     /**
@@ -57,6 +59,7 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         tank.setDefaultCommand(tank.tankCMD(driver));
+        operator.povDown().onTrue(leds.call().withTimeout(5));
     }
 
     /**
