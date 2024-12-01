@@ -40,4 +40,11 @@ public final class Constants {
         public static final int BEAMBREAK2 = 1;
         public static final int BALLMOTOR = 12;
     }
+
+    public static final class Hatch {
+        public static final int HATCHMOTOR = 10;
+        public static final int TOUCHSENSOR = 3;
+        public static final int CANCODER = 15;
+
+    }
 }
