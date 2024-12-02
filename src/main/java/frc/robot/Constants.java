@@ -1,5 +1,7 @@
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Rotation2d;
+
 /**
  * Constants file.
  */
@@ -42,9 +44,42 @@ public final class Constants {
     }
 
     public static final class Hatch {
+        /**
+         * hardware ports
+         */
         public static final int HATCHMOTOR = 10;
         public static final int TOUCHSENSOR = 3;
         public static final int CANCODER = 15;
 
+        /**
+         * PID values (theres none :O)
+         */
+        public static final double HATCH_LARGE_KP = 1.0;
+        public static final double HATCH_KP = 1.0;
+        public static final double HATCH_KI = 1.0;
+        public static final double HATCH_KD = 1.0;
+        public static final double MAX_VELOCITY = 1.0;
+        public static final double MAX_ACCELERATION = 1.0;
+
+        public static final Rotation2d HATCH_REF_1_ANGLE_MEASURED = Rotation2d.fromRotations(0.0);
+        public static final Rotation2d HATCH_REF_2_ANGLE_MEASURED = Rotation2d.fromRotations(0.0);
+        public static final Rotation2d HATCH_REF_1_ANGLE_ACTUAL = Rotation2d.fromDegrees(0.0);
+        public static final Rotation2d HATCH_REF_2_ANGLE_ACTUAL = Rotation2d.fromDegrees(0.0);
+
+        public static final double HATCH_M;
+        public static final double HATCH_B;
+        public static final Rotation2d HATCH_HOME = Rotation2d.fromDegrees(0.0);
+        public static final Rotation2d INTAKE_POSITON = Rotation2d.fromDegrees(0.0);
+
+        static {
+            HATCH_M =
+                (HATCH_REF_2_ANGLE_ACTUAL.getRotations() - HATCH_REF_1_ANGLE_ACTUAL.getRotations())
+                    / (HATCH_REF_2_ANGLE_MEASURED.getRotations()
+                        - HATCH_REF_1_ANGLE_MEASURED.getRotations());
+            // meas_1 * m + b = act_1
+            // b = act_1 - meas_1 * m
+            HATCH_B = HATCH_REF_1_ANGLE_ACTUAL.getRotations()
+                - HATCH_REF_1_ANGLE_MEASURED.getRotations() * HATCH_M;
+        }
     }
 }

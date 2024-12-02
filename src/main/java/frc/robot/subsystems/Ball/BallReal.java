@@ -16,6 +16,7 @@ public class BallReal implements BallIO {
     /**
      * sets power for motors
      */
+    @Override
     public void setPower(double power) {
         ballMotor.set(power);
     }

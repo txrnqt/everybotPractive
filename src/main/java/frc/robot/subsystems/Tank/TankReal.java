@@ -44,7 +44,7 @@ public class TankReal implements TankIO {
         /**
          * change to closed loop
          */
-        tankFrontLeftLead.getConfigurator().apply();
+        // tankFrontLeftLead.getConfigurator().apply();
 
         /**
          * sets motor to netural mode
@@ -60,7 +60,7 @@ public class TankReal implements TankIO {
 
     }
 
-
+    @Override
     /**
      * sets motor power
      */
