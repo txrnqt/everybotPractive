@@ -77,8 +77,14 @@ public class Hatch extends SubsystemBase {
             .andThen(Commands.runOnce(() -> pidEnabled = false));
     }
 
+    public Command intake() {
+        Command checkIntake = (goToPosition(Rotation2d.fromDegrees(1))
+            .until(() -> getHatchAngle().getDegrees() > 1).withTimeout(1));
+        Command goToIntake = (goToPosition(Constants.Hatch.INTAKE_POSITON).withTimeout(1));
+        return checkIntake.andThen(goToIntake);
+    }
+
     public Boolean atGoal() {
         return hatchPIDController.atSetpoint();
     }
-
 }

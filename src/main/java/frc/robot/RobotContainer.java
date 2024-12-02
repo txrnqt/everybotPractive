@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Robot.RobotRunType;
 import frc.robot.subsystems.LEDs;
 import frc.robot.subsystems.Hatch.Hatch;
+import frc.robot.subsystems.Hatch.HatchIO;
 import frc.robot.subsystems.Hatch.HatchReal;
 import frc.robot.subsystems.Tank.Tank;
 import frc.robot.subsystems.Tank.TankIO;
@@ -47,6 +48,7 @@ public class RobotContainer {
                 break;
             case kSimulation:
                 tank = new Tank(new TankIO() {});
+                hatch = new Hatch(new HatchIO() {}, operator);
                 break;
             default:
 
@@ -65,6 +67,7 @@ public class RobotContainer {
         tank.setDefaultCommand(tank.tankCMD(driver));
         operator.povDown().onTrue(leds.call().withTimeout(5));
         operator.a().onTrue(hatch.homePosition());
+        operator.x().onTrue(hatch.intake());
     }
 
     /**
