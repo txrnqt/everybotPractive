@@ -11,7 +11,7 @@ import frc.robot.Constants;
 
 public class Hatch extends SubsystemBase {
     public HatchIO io;
-    public HatchIOInputsAutoLogged inputs = new HatchIOInputsAutoLogged();
+    public HatchIOInputsAutoLogged inputs = new HatchIOInputsAutoLogged;
     private InterpolatingDoubleTreeMap radToAngle = new InterpolatingDoubleTreeMap();
     private CommandXboxController operator;
     private double estmAngle = 0.0;
@@ -22,10 +22,6 @@ public class Hatch extends SubsystemBase {
      */
     PIDController hatchPIDController = new PIDController(Constants.Hatch.HATCH_KP,
         Constants.Hatch.HATCH_KI, Constants.Hatch.HATCH_KD);
-
-    PIDController hatchProfiledPIDController = new PIDController(Constants.Hatch.HATCH_LARGE_KP,
-        Constants.Hatch.HATCH_KI, frc.robot.Constants.Hatch.HATCH_KD);
-
 
     /**
      * calculates wrist angle from raw value
@@ -50,7 +46,6 @@ public class Hatch extends SubsystemBase {
      */
     public void setHatchAngle(Rotation2d angle) {
         hatchPIDController.setSetpoint(angle.getRotations());
-        hatchProfiledPIDController.setSetpoint(angle.getRotations());
         pidEnabled = true;
     }
 
@@ -71,7 +66,6 @@ public class Hatch extends SubsystemBase {
         return Commands.runOnce(() -> {
             hatchPIDController.reset();
             hatchPIDController.setSetpoint(angle.getRotations());
-            hatchProfiledPIDController.setSetpoint(angle.getRotations());
             pidEnabled = true;
         }).andThen(Commands.waitUntil(() -> atGoal()))
             .andThen(Commands.runOnce(() -> pidEnabled = false));

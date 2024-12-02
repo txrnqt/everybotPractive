@@ -10,5 +10,5 @@ public interface HatchIO {
 
     public default void updateInputs(HatchIOInputs inputs) {}
 
-    public default void setPower(double power) {}
+    public default void setVolatge(double v) {}
 }

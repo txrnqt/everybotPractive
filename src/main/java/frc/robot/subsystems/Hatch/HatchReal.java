@@ -22,6 +22,7 @@ public class HatchReal implements HatchIO {
         hatchMotor.setIdleMode(IdleMode.kBrake);
     }
 
+    @Override
     public void setVolatge(double v) {
         hatchMotor.setVoltage(v);
     }
