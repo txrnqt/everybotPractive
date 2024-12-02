@@ -68,6 +68,7 @@ public final class Constants {
 
         public static final double HATCH_M;
         public static final double HATCH_B;
+        public static final Rotation2d HATCH_HOME = Rotation2d.fromDegrees(0.0);
 
         static {
             HATCH_M =

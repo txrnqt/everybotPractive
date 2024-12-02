@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Robot.RobotRunType;
 import frc.robot.subsystems.LEDs;
+import frc.robot.subsystems.Hatch.Hatch;
+import frc.robot.subsystems.Hatch.HatchReal;
 import frc.robot.subsystems.Tank.Tank;
 import frc.robot.subsystems.Tank.TankIO;
 import frc.robot.subsystems.Tank.TankReal;
@@ -29,6 +31,7 @@ public class RobotContainer {
 
     /* Subsystems */
     private Tank tank;
+    private Hatch hatch;
     private LEDs leds = new LEDs(9, 100);
 
 
@@ -40,6 +43,7 @@ public class RobotContainer {
         switch (runtimeType) {
             case kReal:
                 tank = new Tank(new TankReal());
+                hatch = new Hatch(new HatchReal(), operator);
                 break;
             case kSimulation:
                 tank = new Tank(new TankIO() {});
@@ -60,6 +64,7 @@ public class RobotContainer {
     private void configureButtonBindings() {
         tank.setDefaultCommand(tank.tankCMD(driver));
         operator.povDown().onTrue(leds.call().withTimeout(5));
+        operator.a().onTrue(hatch.homePosition());
     }
 
     /**

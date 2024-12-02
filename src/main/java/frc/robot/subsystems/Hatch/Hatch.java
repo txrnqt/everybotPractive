@@ -4,6 +4,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants;
@@ -54,18 +55,26 @@ public class Hatch extends SubsystemBase {
     }
 
     public Command homePosition() {
-        Command checkHome = Command.either(
-            goTO
-        )
+        Command checkHome = (goToPosition(Rotation2d.fromDegrees(1))
+            .until(() -> getHatchAngle().getDegrees() > 1).withTimeout(1));
+        Command goHome = goToPosition(frc.robot.Constants.Hatch.HATCH_HOME).withTimeout(1);
+        return checkHome.andThen(goHome);
     }
 
-    public Command goToPositon(Rotation2d angle) {
-        return Command.runOnce(() -> {
+    /**
+     * sets the hatch wrist at a certant angle using set points
+     * 
+     * @param angle that is desired
+     * @return moves the wrist
+     */
+    public Command goToPosition(Rotation2d angle) {
+        return Commands.runOnce(() -> {
             hatchPIDController.reset();
-            hatchPIDController.setSetpoint(angle.getRotations);
-            hatchProfiledPIDController.setSetpoint(angle.getRotations);
+            hatchPIDController.setSetpoint(angle.getRotations());
+            hatchProfiledPIDController.setSetpoint(angle.getRotations());
             pidEnabled = true;
-        }).andThen(Commands.waitUntil(() -> atGoal))
+        }).andThen(Commands.waitUntil(() -> atGoal()))
+            .andThen(Commands.runOnce(() -> pidEnabled = false));
     }
 
     public Boolean atGoal() {
