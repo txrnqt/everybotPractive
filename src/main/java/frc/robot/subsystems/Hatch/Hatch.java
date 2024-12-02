@@ -1,5 +1,6 @@
 package frc.robot.subsystems.Hatch;
 
+import org.littletonrobotics.junction.Logger;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
@@ -11,7 +12,7 @@ import frc.robot.Constants;
 
 public class Hatch extends SubsystemBase {
     public HatchIO io;
-    public HatchIOInputsAutoLogged inputs = new HatchIOInputsAutoLogged;
+    public HatchIOInputsAutoLogged inputs = new HatchIOInputsAutoLogged();
     private InterpolatingDoubleTreeMap radToAngle = new InterpolatingDoubleTreeMap();
     private CommandXboxController operator;
     private double estmAngle = 0.0;
@@ -39,6 +40,15 @@ public class Hatch extends SubsystemBase {
         this.operator = operator;
         this.io = io;
         io.updateInputs(inputs);
+    }
+
+    public void periodic() {
+        io.updateInputs(inputs);
+        Logger.processInputs("hatch", inputs);
+
+        Rotation2d currentHatchAngle = Rotation2d.fromRotations(inputs.hatchAbsoluteENCRawValue);
+        double pid = hatchPIDController.calculate(currentHatchAngle.getDegrees());
+        io.setVolatge(pid);
     }
 
     /**
