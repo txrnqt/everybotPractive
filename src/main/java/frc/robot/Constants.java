@@ -42,9 +42,21 @@ public final class Constants {
     }
 
     public static final class Hatch {
+        /**
+         * hardware ports
+         */
         public static final int HATCHMOTOR = 10;
         public static final int TOUCHSENSOR = 3;
         public static final int CANCODER = 15;
 
+        /**
+         * PID values (theres none :O)
+         */
+        public static final double HATCH_LARGE_KP = 1.0;
+        public static final double HATCH_KP = 1.0;
+        public static final double HATCH_KI = 1.0;
+        public static final double HATCH_KD = 1.0;
+        public static final double MAX_VELOCITY = 1.0;
+        public static final double MAX_ACCELERATION = 1.0;
     }
 }

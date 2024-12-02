@@ -4,10 +4,13 @@ import org.littletonrobotics.junction.AutoLog;
 
 public interface HatchIO {
     @AutoLog
-    public class HatchIOInputs {
+    public static class HatchIOInputs {
+        public double positon;
     }
 
-    public default void updateInputs(HatchIOInputs inputs) {}
 
-    public default void setPower(double power) {}
+
+    public default void setVolatge(double v) {}
+
+    public default void updateInputs(HatchIOInputs inputs) {}
 }
