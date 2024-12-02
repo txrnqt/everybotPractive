@@ -1,6 +1,7 @@
 package frc.robot.subsystems.Hatch;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -16,4 +17,5 @@ public class Hatch extends SubsystemBase {
     PIDController hatchProfiledPIDController = new PIDController(Constants.Hatch.HATCH_LARGE_KP,
         Constants.Hatch.HATCH_KI, frc.robot.Constants.Hatch.HATCH_KD);
 
+    private GenericEntry wristAngle = 
 }
