@@ -51,13 +51,6 @@ public class Hatch extends SubsystemBase {
         io.setVolatge(pid);
     }
 
-    /**
-     * gets wrist set point
-     */
-    public void setHatchAngle(Rotation2d angle) {
-        hatchPIDController.setSetpoint(angle.getRotations());
-        pidEnabled = true;
-    }
 
     public Command homePosition() {
         Command checkHome = (goToPosition(Rotation2d.fromDegrees(1))

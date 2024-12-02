@@ -2,6 +2,7 @@ package frc.robot.subsystems.Tank;
 
 import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.StatusSignal;
+import com.ctre.phoenix6.controls.StrictFollower;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.kauailabs.navx.frc.AHRS;
@@ -11,11 +12,10 @@ public class TankReal implements TankIO {
     /**
      * initilize motors and sensors
      */
-    private final TalonFX tankFrontRightLead = new TalonFX(4);
-    private final TalonFX tankFrontLeftLead = new TalonFX(2);
-    private final TalonFX tankBackRightFollow = new TalonFX(5);
-    private final TalonFX tankBackLeftFollow = new TalonFX(3);
-
+    private final TalonFX tankFrontRightLead = new TalonFX(4, "CANivore");
+    private final TalonFX tankFrontLeftLead = new TalonFX(2, "CANivore");
+    private final TalonFX tankBackRightFollow = new TalonFX(5, "CANivore");
+    private final TalonFX tankBackLeftFollow = new TalonFX(3, "CANivore");
     private final AHRS gyro = new AHRS(Constants.Tank.navXID);
     private final StatusSignal<Double> tankRightLeadPositon;
     private final StatusSignal<Double> tankRightLeadVelocity;
@@ -28,8 +28,8 @@ public class TankReal implements TankIO {
         /**
          * set motors to follow each other
          */
-        tankBackLeftFollow.set(tankFrontLeftLead.getDeviceID());
-        tankBackRightFollow.set(tankFrontRightLead.getDeviceID());
+        tankBackLeftFollow.setControl(new StrictFollower(tankFrontLeftLead.getDeviceID()));
+        tankBackRightFollow.setControl(new StrictFollower(tankFrontRightLead.getDeviceID()));
 
         /**
          * get data from motors
@@ -41,23 +41,14 @@ public class TankReal implements TankIO {
         tankLeftLeadVelocity = tankFrontLeftLead.getVelocity();
         tankLeftLeadVoltage = tankFrontLeftLead.getMotorVoltage();
 
-        /**
-         * change to closed loop
-         */
-        // tankFrontLeftLead.getConfigurator().apply();
 
         /**
          * sets motor to netural mode
          */
-        tankFrontLeftLead.setNeutralMode(NeutralModeValue.Brake);
-        tankFrontRightLead.setNeutralMode(NeutralModeValue.Brake);
-        tankBackLeftFollow.setNeutralMode(NeutralModeValue.Brake);
-        tankBackRightFollow.setNeutralMode(NeutralModeValue.Brake);
-
-        /**
-         * reset encoders
-         */
-
+        tankFrontLeftLead.setNeutralMode(NeutralModeValue.Coast);
+        tankFrontRightLead.setNeutralMode(NeutralModeValue.Coast);
+        tankBackLeftFollow.setNeutralMode(NeutralModeValue.Coast);
+        tankBackRightFollow.setNeutralMode(NeutralModeValue.Coast);
     }
 
     @Override
@@ -73,16 +64,23 @@ public class TankReal implements TankIO {
 
     public void updateInputs(TankIOInputs inputs) {
         /**
+         * refreshs motor data
+         */
+        BaseStatusSignal.refreshAll(tankRightLeadPositon, tankRightLeadVelocity,
+            tankRightLeadVoltage, tankLeftLeadPositon, tankLeftLeadVelocity, tankLeftLeadVoltage);
+        inputs.tankLeftLeadAppliedVolts = tankLeftLeadVoltage.getValueAsDouble();
+        inputs.tankLeftLeadPositionRad = tankLeftLeadPositon.getValueAsDouble();
+        inputs.tankLeftLeadVelocityRadPerSec = tankLeftLeadVelocity.getValueAsDouble();
+        inputs.tankRightLeadAppliedVolts = tankRightLeadVoltage.getValueAsDouble();
+        inputs.tankRightLeadPositionRad = tankRightLeadPositon.getValueAsDouble();
+        inputs.tankRightLeadVelocityRadPerSec = tankRightLeadVelocity.getValueAsDouble();
+
+
+        /**
          * gets gyro data
          */
         inputs.yaw = gyro.getYaw();
         inputs.roll = gyro.getRoll();
         inputs.pitch = gyro.getPitch();
-
-        /**
-         * refreshs motor data
-         */
-        BaseStatusSignal.refreshAll(tankRightLeadPositon, tankRightLeadVelocity,
-            tankRightLeadVoltage, tankLeftLeadPositon, tankLeftLeadVelocity, tankLeftLeadVoltage);
     }
 }
