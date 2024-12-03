@@ -1,7 +1,6 @@
 package frc.robot.subsystems.Ball;
 
 import com.revrobotics.CANSparkLowLevel.MotorType;
-import org.apache.http.client.protocol.RequestTargetAuthentication;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.Constants;
@@ -22,15 +21,11 @@ public class BallReal implements BallIO {
         ballMotor.set(power);
     }
 
-    public boolean hasBall() {
-        return intakeBeamBreak.get();
-    }
-    
-    public boolean readyToShoot() {
-        return outtakeBeamBreak.get();
-    }
 
     public void periodic() {}
 
-    public void updateInputs() {}
+    public void updateInputs(BallIOInputs inputs) {
+        inputs.hasBall = intakeBeamBreak.get();
+        inputs.readyToShoot = outtakeBeamBreak.get();
+    }
 }
