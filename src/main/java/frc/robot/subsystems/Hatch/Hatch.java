@@ -52,6 +52,9 @@ public class Hatch extends SubsystemBase {
         }).andThen(Commands.waitUntil(() -> atGoal()));
     }
 
+    /**
+     * move the wrist back to the "home" positon
+     */
     public Command homePosition() {
         Command checkHome = (goToPosition(Rotation2d.fromDegrees(1))
             .until(() -> getHatchAngle().getDegrees() > 1).withTimeout(1));
@@ -61,10 +64,6 @@ public class Hatch extends SubsystemBase {
 
     /**
      * sets the hatch wrist at a certant angle using set points
-     * 
-     * @param angle that is desired
-     * 
-     * @return moves the wrist
      */
     public Command goToPosition(Rotation2d angle) {
         return Commands.runOnce(() -> {
@@ -73,6 +72,9 @@ public class Hatch extends SubsystemBase {
         }).andThen(Commands.waitUntil(() -> atGoal()));
     }
 
+    /**
+     * move the wrist up in the "intake" position
+     */
     public Command intake() {
         Command checkIntake = (goToPosition(Rotation2d.fromDegrees(1))
             .until(() -> getHatchAngle().getDegrees() > 1).withTimeout(1));
@@ -80,6 +82,9 @@ public class Hatch extends SubsystemBase {
         return checkIntake.andThen(goToIntake);
     }
 
+    /**
+     * checks if the wrist is at the desired set point
+     */
     public Boolean atGoal() {
         return hatchPIDController.atSetpoint();
     }

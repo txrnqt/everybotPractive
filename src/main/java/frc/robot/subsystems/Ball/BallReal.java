@@ -6,6 +6,9 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.Constants;
 
 public class BallReal implements BallIO {
+    /**
+     * initilize motors and senors
+     */
     private final CANSparkMax ballMotor =
         new CANSparkMax(Constants.Ball.BALLMOTOR, MotorType.kBrushless);
     private final DigitalInput intakeBeamBreak = new DigitalInput(Constants.Ball.BEAMBREAK1);
@@ -13,10 +16,11 @@ public class BallReal implements BallIO {
 
     public BallReal() {}
 
+    @Override
+
     /**
      * sets power for motors
      */
-    @Override
     public void setPower(double power) {
         ballMotor.set(power);
     }

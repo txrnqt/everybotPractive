@@ -6,6 +6,9 @@ public interface BallIO {
 
     @AutoLog
     public class BallIOInputs {
+        /**
+         * data from the beam breaks
+         */
         public boolean hasBall;
         public boolean readyToShoot;
     }
