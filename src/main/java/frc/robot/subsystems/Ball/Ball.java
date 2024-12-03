@@ -23,12 +23,18 @@ public class Ball extends SubsystemBase {
         io.setPower(power);
     }
 
+    /**
+     * sets ball intake
+     */
     public Command intake() {
         return run(() -> {
             setPower(1);
         }).until(() -> inputs.hasBall).withTimeout(0);
     }
 
+    /**
+     * shoots ball
+     */
     public Command shoot() {
         return run(() -> {
             setPower(1);

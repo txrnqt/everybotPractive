@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.Constants;
 
 public class HatchReal implements HatchIO {
+    /** initilize motors and sensors */
     private CANSparkMax hatchMotor =
         new CANSparkMax(Constants.Hatch.HATCHMOTOR, MotorType.kBrushless);
     private DigitalInput touchSensor = new DigitalInput(Constants.Hatch.TOUCHSENSOR);
@@ -23,6 +24,7 @@ public class HatchReal implements HatchIO {
     }
 
     @Override
+    /** sets voltage */
     public void setVolatge(double v) {
         hatchMotor.setVoltage(v);
     }
