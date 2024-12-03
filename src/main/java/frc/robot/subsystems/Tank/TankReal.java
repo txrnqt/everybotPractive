@@ -12,10 +12,10 @@ public class TankReal implements TankIO {
     /**
      * initilize motors and sensors
      */
-    private final TalonFX tankFrontRightLead = new TalonFX(Constants.Tank.FRONTRIGHT);
-    private final TalonFX tankFrontLeftLead = new TalonFX(Constants.Tank.FRONTLEFT);
-    private final TalonFX tankBackRightFollow = new TalonFX(Constants.Tank.BACKRIGHT);
-    private final TalonFX tankBackLeftFollow = new TalonFX(Constants.Tank.BACKLEFT);
+    private final TalonFX tankFrontRightLead = new TalonFX(Constants.Tank.FRONTRIGHT, "CANivore");
+    private final TalonFX tankFrontLeftLead = new TalonFX(Constants.Tank.FRONTLEFT, "CANivore");
+    private final TalonFX tankBackRightFollow = new TalonFX(Constants.Tank.BACKRIGHT, "CANivore");
+    private final TalonFX tankBackLeftFollow = new TalonFX(Constants.Tank.BACKLEFT, "CANivore");
 
     private final AHRS gyro = new AHRS(Constants.Tank.navXID);
     private final StatusSignal<Double> tankRightLeadVelocity;
