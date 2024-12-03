@@ -1,9 +1,10 @@
 package frc.robot.subsystems.Ball;
 
+import java.util.function.BooleanSupplier;
 import org.littletonrobotics.junction.Logger;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 public class Ball extends SubsystemBase {
     private BallIO io;
@@ -24,9 +25,14 @@ public class Ball extends SubsystemBase {
         io.setPower(power);
     }
 
-    public Command ballManCMD(CommandXboxController contrller) {
+    public boolean hasBall() {
+        return io.hasBall();
+    }
+
+    public Command intake() {
+        boolean hasball = hasBall();
         return run(() -> {
-            setPower(contrller.getLeftY());
-        });
+            setPower(1);
+        }).until(hasball);
     }
 }

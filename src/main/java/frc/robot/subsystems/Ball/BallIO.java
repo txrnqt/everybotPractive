@@ -11,4 +11,8 @@ public interface BallIO {
     public default void updateInputs(BallIOInputs inputs) {}
 
     public default void setPower(double Power) {}
+
+    public default boolean hasBall() {
+        return true;
+    }
 }
