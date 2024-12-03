@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Robot.RobotRunType;
 import frc.robot.subsystems.LEDs;
+import frc.robot.subsystems.Ball.Ball;
+import frc.robot.subsystems.Ball.BallIO;
+import frc.robot.subsystems.Ball.BallReal;
 import frc.robot.subsystems.Hatch.Hatch;
 import frc.robot.subsystems.Hatch.HatchIO;
 import frc.robot.subsystems.Hatch.HatchReal;
@@ -35,6 +38,7 @@ public class RobotContainer {
     /* Subsystems */
     private Tank tank;
     private Hatch hatch;
+    private Ball ball;
     private LEDs leds = new LEDs(9, 100);
 
 
@@ -47,10 +51,12 @@ public class RobotContainer {
             case kReal:
                 tank = new Tank(new TankReal());
                 hatch = new Hatch(new HatchReal(), operator);
+                ball = new Ball(new BallReal());
                 break;
             case kSimulation:
                 tank = new Tank(new TankIO() {});
                 hatch = new Hatch(new HatchIO() {}, operator);
+                ball = new Ball(new BallIO() {});
                 break;
             default:
 
@@ -67,6 +73,8 @@ public class RobotContainer {
      * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
+
+        /** driver controlls */
         tank.setDefaultCommand(tank.tankCMD(driver));
 
 
@@ -78,6 +86,8 @@ public class RobotContainer {
         })).withTimeout(5));
         operator.a().onTrue(hatch.homePosition());
         operator.x().onTrue(hatch.intake());
+        operator.y().onTrue(ball.intake());
+        operator.b().onTrue(ball.shoot());
     }
 
     /**

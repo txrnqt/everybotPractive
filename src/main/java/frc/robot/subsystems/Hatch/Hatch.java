@@ -12,10 +12,8 @@ import frc.robot.Constants;
 public class Hatch extends SubsystemBase {
     public HatchIO io;
     public HatchIOInputsAutoLogged inputs = new HatchIOInputsAutoLogged();
-    private CommandXboxController operator;
 
     public Hatch(HatchIO io, CommandXboxController operator) {
-        this.operator = operator;
         this.io = io;
         io.updateInputs(inputs);
     }
