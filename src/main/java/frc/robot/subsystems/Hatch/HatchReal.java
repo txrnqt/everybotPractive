@@ -29,6 +29,7 @@ public class HatchReal implements HatchIO {
 
     public void updateInputs(HatchIOInputs inputs) {
         // inputs.positon = hatchCancoder.getPosition();
-        inputs.hatchAbsoluteENCRawValue = hatchWristEnc.getPosition();
+        inputs.hatchAbsoluteENCRawValue = hatchCancoder.getPosition().getValueAsDouble();
+        inputs.touchSensor = touchSensor.get();
     }
 }

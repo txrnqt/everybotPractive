@@ -6,6 +6,7 @@ public interface HatchIO {
     @AutoLog
     public class HatchIOInputs {
         public double hatchAbsoluteENCRawValue;
+        public boolean touchSensor;
     }
 
     public default void updateInputs(HatchIOInputs inputs) {}
