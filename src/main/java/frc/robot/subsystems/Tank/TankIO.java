@@ -9,16 +9,12 @@ public interface TankIO {
         /**
          * right motor data
          */
-        public double tankRightLeadPositionRad;
         public double tankRightLeadVelocityRadPerSec;
-        public double tankRightLeadAppliedVolts;
 
         /**
          * left motor data
          */
-        public double tankLeftLeadPositionRad;
         public double tankLeftLeadVelocityRadPerSec;
-        public double tankLeftLeadAppliedVolts;
 
         /**
          * gyro data
@@ -30,5 +26,5 @@ public interface TankIO {
 
     public default void updateInputs(TankIOInputs inputs) {}
 
-    public default void setPower(double powerLeft, double powerRight) {}
+    public default void setVolatge(double leftV, double rightV) {}
 }
