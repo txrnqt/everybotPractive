@@ -55,6 +55,7 @@ public class RobotContainer {
             default:
 
         }
+        leds.setDefaultCommand(leds.setAllianceColor().ignoringDisable(true));
         // Configure the button bindings
         configureButtonBindings();
     }

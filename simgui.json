@@ -1,5 +1,10 @@
 {
   "HALProvider": {
+    "Addressable LEDs": {
+      "window": {
+        "visible": true
+      }
+    },
     "PowerDistributions": {
       "window": {
         "visible": true
