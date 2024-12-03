@@ -35,6 +35,15 @@ public final class Constants {
         public static final edu.wpi.first.wpilibj.SPI.Port navXID =
             edu.wpi.first.wpilibj.SPI.Port.kMXP;
         public static final boolean isFeildRelative = true;
+        public static final int FRONTRIGHT = 4;
+        public static final int FRONTLEFT = 2;
+        public static final int BACKRIGHT = 5;
+        public static final int BACKLEFT = 3;
+
+        /** pid value */
+        public static final double TANK_KP = 0.0;
+        public static final double TANK_KI = 0.0;
+        public static final double TANK_KD = 0.0;
     }
 
     public static final class Ball {

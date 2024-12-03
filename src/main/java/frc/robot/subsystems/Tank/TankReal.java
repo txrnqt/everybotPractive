@@ -12,18 +12,14 @@ public class TankReal implements TankIO {
     /**
      * initilize motors and sensors
      */
-    private final TalonFX tankFrontRightLead = new TalonFX(4, "Canivore");
-    private final TalonFX tankFrontLeftLead = new TalonFX(2, "Canivore");
-    private final TalonFX tankBackRightFollow = new TalonFX(5, "Canivore");
-    private final TalonFX tankBackLeftFollow = new TalonFX(3, "Canivore");
+    private final TalonFX tankFrontRightLead = new TalonFX(Constants.Tank.FRONTRIGHT);
+    private final TalonFX tankFrontLeftLead = new TalonFX(Constants.Tank.FRONTLEFT);
+    private final TalonFX tankBackRightFollow = new TalonFX(Constants.Tank.BACKRIGHT);
+    private final TalonFX tankBackLeftFollow = new TalonFX(Constants.Tank.BACKLEFT);
 
     private final AHRS gyro = new AHRS(Constants.Tank.navXID);
-    private final StatusSignal<Double> tankRightLeadPositon;
     private final StatusSignal<Double> tankRightLeadVelocity;
-    private final StatusSignal<Double> tankRightLeadVoltage;
-    private final StatusSignal<Double> tankLeftLeadPositon;
     private final StatusSignal<Double> tankLeftLeadVelocity;
-    private final StatusSignal<Double> tankLeftLeadVoltage;
 
     public TankReal() {
         /**
@@ -35,17 +31,8 @@ public class TankReal implements TankIO {
         /**
          * get data from motors
          */
-        tankRightLeadPositon = tankFrontRightLead.getPosition();
         tankRightLeadVelocity = tankFrontRightLead.getVelocity();
-        tankRightLeadVoltage = tankFrontRightLead.getMotorVoltage();
-        tankLeftLeadPositon = tankFrontLeftLead.getPosition();
         tankLeftLeadVelocity = tankFrontLeftLead.getVelocity();
-        tankLeftLeadVoltage = tankFrontLeftLead.getMotorVoltage();
-
-        /**
-         * change to closed loop
-         */
-        // tankFrontLeftLead.getConfigurator().apply();
 
         /**
          * sets motor to netural mode
@@ -65,9 +52,9 @@ public class TankReal implements TankIO {
     /**
      * sets motor power
      */
-    public void setPower(double powerLeft, double powerRight) {
-        tankBackLeftFollow.set(powerLeft);
-        tankBackRightFollow.set(powerRight);
+    public void setVolatge(double leftV, double rightV) {
+        tankBackLeftFollow.set(leftV);
+        tankBackRightFollow.set(rightV);
     }
 
     public void periodic() {}
@@ -81,9 +68,14 @@ public class TankReal implements TankIO {
         inputs.pitch = gyro.getPitch();
 
         /**
+         * gets motor data
+         */
+        inputs.tankRightLeadVelocityRadPerSec = tankRightLeadVelocity.getValueAsDouble();
+        inputs.tankLeftLeadVelocityRadPerSec = tankLeftLeadVelocity.getValueAsDouble();
+
+        /**
          * refreshs motor data
          */
-        BaseStatusSignal.refreshAll(tankRightLeadPositon, tankRightLeadVelocity,
-            tankRightLeadVoltage, tankLeftLeadPositon, tankLeftLeadVelocity, tankLeftLeadVoltage);
+        BaseStatusSignal.refreshAll(tankRightLeadVelocity, tankLeftLeadVelocity);
     }
 }

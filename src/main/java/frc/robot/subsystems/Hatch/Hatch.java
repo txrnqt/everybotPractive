@@ -18,6 +18,7 @@ public class Hatch extends SubsystemBase {
         io.updateInputs(inputs);
     }
 
+    @Override
     public void periodic() {
         io.updateInputs(inputs);
         Logger.processInputs("hatch", inputs);
