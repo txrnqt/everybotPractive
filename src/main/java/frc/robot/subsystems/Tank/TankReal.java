@@ -2,6 +2,7 @@ package frc.robot.subsystems.Tank;
 
 import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.StatusSignal;
+import com.ctre.phoenix6.controls.StrictFollower;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.kauailabs.navx.frc.AHRS;
@@ -15,6 +16,7 @@ public class TankReal implements TankIO {
     private final TalonFX tankFrontLeftLead = new TalonFX(Constants.Tank.FRONTLEFT);
     private final TalonFX tankBackRightFollow = new TalonFX(Constants.Tank.BACKRIGHT);
     private final TalonFX tankBackLeftFollow = new TalonFX(Constants.Tank.BACKLEFT);
+
     private final AHRS gyro = new AHRS(Constants.Tank.navXID);
     private final StatusSignal<Double> tankRightLeadVelocity;
     private final StatusSignal<Double> tankLeftLeadVelocity;
@@ -23,8 +25,8 @@ public class TankReal implements TankIO {
         /**
          * set motors to follow each other
          */
-        tankBackLeftFollow.set(tankFrontLeftLead.getDeviceID());
-        tankBackRightFollow.set(tankFrontRightLead.getDeviceID());
+        tankBackLeftFollow.setControl(new StrictFollower(tankFrontLeftLead.getDeviceID()));
+        tankBackRightFollow.setControl(new StrictFollower(tankFrontRightLead.getDeviceID()));
 
         /**
          * get data from motors
