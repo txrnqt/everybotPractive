@@ -4,8 +4,7 @@ import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -44,6 +43,43 @@ public class LEDs extends SubsystemBase {
             setColor(color);
 
         }, this);
+    }
+
+    private int flash = 0;
+
+    public void flash(Color color1, Color color2) {
+        Timer timer = new Timer();
+        timer.start();
+        boolean isOn = false;
+
+        if (timer.advanceIfElapsed(0.5)) {
+            isOn = !isOn;
+        }
+        if (isOn) {
+            for (var i = 0; i < buffer.getLength(); i++) {
+                setColor(color2);
+            }
+        } else {
+            for (var i = 0; i < buffer.getLength(); i++) {
+                setColor(color2);
+            }
+        }
+    }
+
+    public Command flashCommand() {
+        return new Command() {
+            @Override
+            public void initialize() {
+                // TODO Auto-generated method stub
+                super.initialize();
+            }
+
+            @Override
+            public void execute() {
+                // TODO Auto-generated method stub
+                super.execute();
+            }
+        };
     }
 
     public Command call() {
