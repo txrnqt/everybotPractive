@@ -45,8 +45,6 @@ public class LEDs extends SubsystemBase {
         }, this);
     }
 
-    private int flash = 0;
-
     public void flash(Color color1, Color color2) {
         Timer timer = new Timer();
         timer.start();
