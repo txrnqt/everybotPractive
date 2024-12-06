@@ -9,8 +9,8 @@ public interface BallIO {
         /**
          * data from the beam breaks
          */
-        public boolean hasBall;
-        public boolean readyToShoot;
+        public boolean intake;
+        public boolean outtake;
     }
 
     public default void updateInputs(BallIOInputs inputs) {}

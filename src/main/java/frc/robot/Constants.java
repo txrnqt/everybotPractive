@@ -85,10 +85,9 @@ public final class Constants {
                 (HATCH_REF_2_ANGLE_ACTUAL.getRotations() - HATCH_REF_1_ANGLE_ACTUAL.getRotations())
                     / (HATCH_REF_2_ANGLE_MEASURED.getRotations()
                         - HATCH_REF_1_ANGLE_MEASURED.getRotations());
-            // meas_1 * m + b = act_1
-            // b = act_1 - meas_1 * m
             HATCH_B = HATCH_REF_1_ANGLE_ACTUAL.getRotations()
                 - HATCH_REF_1_ANGLE_MEASURED.getRotations() * HATCH_M;
         }
     }
 }
+

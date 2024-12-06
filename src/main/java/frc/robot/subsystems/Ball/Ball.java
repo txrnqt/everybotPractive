@@ -29,7 +29,7 @@ public class Ball extends SubsystemBase {
     public Command intake() {
         return run(() -> {
             setPower(1);
-        }).until(() -> inputs.hasBall).withTimeout(0);
+        }).until(() -> inputs.intake).withTimeout(0);
     }
 
     /**
@@ -38,6 +38,12 @@ public class Ball extends SubsystemBase {
     public Command shoot() {
         return run(() -> {
             setPower(1);
-        }).unless(() -> !inputs.readyToShoot).withTimeout(0);
+        }).withTimeout(0);
+    }
+
+    public Command move() {
+        return run(() -> {
+            setPower(1);
+        }).unless(() -> inputs.outtake).withTimeout(0);
     }
 }

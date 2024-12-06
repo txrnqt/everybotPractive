@@ -29,7 +29,7 @@ public class BallReal implements BallIO {
     public void periodic() {}
 
     public void updateInputs(BallIOInputs inputs) {
-        inputs.hasBall = intakeBeamBreak.get();
-        inputs.readyToShoot = outtakeBeamBreak.get();
+        inputs.intake = intakeBeamBreak.get();
+        inputs.outtake = outtakeBeamBreak.get();
     }
 }

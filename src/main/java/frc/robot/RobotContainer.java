@@ -86,8 +86,10 @@ public class RobotContainer {
         })).withTimeout(5));
         operator.a().onTrue(hatch.homePosition());
         operator.x().onTrue(hatch.intake());
-        operator.y().onTrue(ball.intake());
-        operator.b().onTrue(ball.shoot());
+        operator.leftTrigger().onTrue(ball.intake());
+        operator.rightTrigger().onTrue(ball.shoot());
+        operator.b().onTrue(ball.move());
+
     }
 
     /**
