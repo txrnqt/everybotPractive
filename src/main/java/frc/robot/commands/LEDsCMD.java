@@ -10,9 +10,6 @@ import frc.robot.subsystems.LEDs;
 public class LEDsCMD extends Command {
     private LEDs leds;
     private int ledLength;
-    private int flashingDelay = 0;
-    private Color color;
-    private Color altColor;
 
     public Command setAllianceColor() {
         return Commands.run(() -> {
