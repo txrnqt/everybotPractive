@@ -28,6 +28,10 @@ public class Hatch extends SubsystemBase {
         io.setVolatge(pid);
     }
 
+    public boolean getTouch() {
+        return inputs.touchSensor;
+    }
+
     PIDController hatchPIDController = new PIDController(Constants.Hatch.HATCH_KP,
         Constants.Hatch.HATCH_KI, Constants.Hatch.HATCH_KD);
 
@@ -88,5 +92,9 @@ public class Hatch extends SubsystemBase {
      */
     public Boolean atGoal() {
         return hatchPIDController.atSetpoint();
+    }
+
+    public boolean touchSensorStatus() {
+        return inputs.touchSensor;
     }
 }

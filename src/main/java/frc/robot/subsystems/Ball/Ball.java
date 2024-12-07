@@ -23,6 +23,14 @@ public class Ball extends SubsystemBase {
         io.setPower(power);
     }
 
+    public boolean getIntake() {
+        return inputs.intake;
+    }
+
+    public boolean getOuttake() {
+        return inputs.outtake;
+    }
+
     /**
      * sets ball intake
      */
