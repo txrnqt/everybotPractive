@@ -78,9 +78,23 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
 
-        hatchTrue.onTrue(leds.hatchTrue().withTimeout(3));
-        intakeTrue.onTrue(leds.ballIntake().withTimeout(3));
-        intakeOuttake.onTrue(leds.ballOuttake().withTimeout(3));
+        hatchTrue.onTrue((leds.hatchTrue().withTimeout(3)).andThen(Commands.startEnd(() -> {
+            operator.getHID().setRumble(RumbleType.kBothRumble, 1);
+        }, () -> {
+            operator.getHID().setRumble(RumbleType.kBothRumble, 0);
+        })));
+
+        intakeTrue.onTrue((leds.ballIntake().withTimeout(3)).andThen(Commands.startEnd(() -> {
+            operator.getHID().setRumble(RumbleType.kBothRumble, 1);
+        }, () -> {
+            operator.getHID().setRumble(RumbleType.kBothRumble, 0);
+        })));
+
+        intakeOuttake.onTrue((leds.ballOuttake().withTimeout(3)).andThen(Commands.startEnd(() -> {
+            operator.getHID().setRumble(RumbleType.kBothRumble, 1);
+        }, () -> {
+            operator.getHID().setRumble(RumbleType.kBothRumble, 0);
+        })));
 
         /** driver controlls */
         tank.setDefaultCommand(tank.tankCMD(driver));
