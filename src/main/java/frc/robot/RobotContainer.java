@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Robot.RobotRunType;
 import frc.robot.subsystems.LEDs;
 import frc.robot.subsystems.Ball.Ball;
@@ -41,6 +42,9 @@ public class RobotContainer {
     private Ball ball;
     private LEDs leds = new LEDs(9, 100);
 
+    private Trigger hatchTrue = new Trigger(() -> hatch.touchSensorStatus()).debounce(.25);
+    private Trigger intakeTrue = new Trigger(() -> ball.getIntake()).debounce(.25);
+    private Trigger intakeOuttake = new Trigger(() -> ball.getOuttake()).debounce(.25);
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -73,6 +77,10 @@ public class RobotContainer {
      * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
+
+        hatchTrue.onTrue(leds.hatchTrue().withTimeout(3));
+        intakeTrue.onTrue(leds.ballIntake().withTimeout(3));
+        intakeOuttake.onTrue(leds.ballOuttake().withTimeout(3));
 
         /** driver controlls */
         tank.setDefaultCommand(tank.tankCMD(driver));

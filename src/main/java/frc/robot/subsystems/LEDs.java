@@ -81,12 +81,22 @@ public class LEDs extends SubsystemBase {
     }
 
     public Command call() {
-        Color callClr = Color.kBlue;
+        Color callClr = Color.kDarkBlue;
         return Commands.run(() -> setColor(callClr));
     }
 
     public Command hatchTrue() {
         Color clr = Color.kLavender;
+        return Commands.run(() -> setColor(clr));
+    }
+
+    public Command ballIntake() {
+        Color clr = Color.kPaleGoldenrod;
+        return Commands.run(() -> setColor(clr));
+    }
+
+    public Command ballOuttake() {
+        Color clr = Color.kPink;
         return Commands.run(() -> setColor(clr));
     }
 }
