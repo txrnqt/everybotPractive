@@ -21,10 +21,6 @@ public class Tank extends SubsystemBase {
     public void periodic() {
         Logger.processInputs("Tank", inputs);
         io.updateInputs(inputs);
-        double pidL = tankPidController.calculate(inputs.tankLeftLeadVelocityRadPerSec);
-        double pidR = tankPidController.calculate(inputs.tankRightLeadVelocityRadPerSec);
-        io.setVolatge(pidL, pidR);
-
     }
 
     PIDController tankPidController =
@@ -36,9 +32,15 @@ public class Tank extends SubsystemBase {
         io.setVolatge(leftV, rightV);
     }
 
+    public void setPIDVoltage(double leftSetPoint, double rightSetPoint) {
+        double pidL = tankPidController.calculate(leftSetPoint);
+        double pidR = tankPidController.calculate(rightSetPoint);
+        setVolatge(pidL, pidR);
+    }
+
     public Command tankCMD(CommandXboxController driver) {
         return run(() -> {
-            setVolatge(driver.getLeftY(), driver.getRightY());
+            setPIDVoltage(driver.getLeftY(), driver.getRightY());
         });
     }
 }
