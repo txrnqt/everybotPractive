@@ -23,7 +23,10 @@ public class Tank extends SubsystemBase {
         io.updateInputs(inputs);
     }
 
-    PIDController tankPidController =
+    PIDController tankPidControllerL =
+        new PIDController(Constants.Tank.TANK_KP, Constants.Tank.TANK_KI, Constants.Tank.TANK_KD);
+
+    PIDController tankPidControllerR =
         new PIDController(Constants.Tank.TANK_KP, Constants.Tank.TANK_KI, Constants.Tank.TANK_KD);
 
     public void setVolatge(double leftV, double rightV) {
@@ -33,8 +36,8 @@ public class Tank extends SubsystemBase {
     }
 
     public void setPIDVoltage(double leftSetPoint, double rightSetPoint) {
-        double pidL = tankPidController.calculate(leftSetPoint);
-        double pidR = tankPidController.calculate(rightSetPoint);
+        double pidL = tankPidControllerL.calculate(leftSetPoint);
+        double pidR = tankPidControllerR.calculate(rightSetPoint);
         setVolatge(pidL, pidR);
     }
 
