@@ -35,14 +35,6 @@ public class Hatch extends SubsystemBase {
     PIDController hatchPIDController = new PIDController(Constants.Hatch.HATCH_KP,
         Constants.Hatch.HATCH_KI, Constants.Hatch.HATCH_KD);
 
-    /**
-     * calculates wrist angle from raw value
-     */
-    public Rotation2d getHatchAngleMesuremet() {
-        return Rotation2d.fromRotations(
-            Constants.Hatch.HATCH_M * inputs.hatchAbsoluteENCRawValue + Constants.Hatch.HATCH_B);
-    }
-
     public Rotation2d getHatchAngle() {
         return Rotation2d.fromRotations(inputs.hatchAbsoluteENCRawValue);
     }

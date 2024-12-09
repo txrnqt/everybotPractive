@@ -9,12 +9,12 @@ public interface TankIO {
         /**
          * right motor data
          */
-        public double tankRightLeadVelocityRadPerSec;
+        public double tankRightLeadVelocity;
 
         /**
          * left motor data
          */
-        public double tankLeftLeadVelocityRadPerSec;
+        public double tankLeftLeadVelocity;
 
         /**
          * gyro data

@@ -36,8 +36,10 @@ public class Tank extends SubsystemBase {
     }
 
     public void setPIDVoltage(double leftSetPoint, double rightSetPoint) {
-        double pidL = tankPidControllerL.calculate(leftSetPoint);
-        double pidR = tankPidControllerR.calculate(rightSetPoint);
+        double pidL =
+            tankPidControllerL.calculate(inputs.tankLeftLeadVelocity * Constants.Tank.MAX_SPEED);
+        double pidR =
+            tankPidControllerR.calculate(inputs.tankRightLeadVelocity * Constants.Tank.MAX_SPEED);
         setVolatge(pidL, pidR);
     }
 
