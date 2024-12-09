@@ -44,6 +44,7 @@ public final class Constants {
         public static final double TANK_KP = 0.0;
         public static final double TANK_KI = 0.0;
         public static final double TANK_KD = 0.0;
+        public static final double MAX_SPEED = 0.0;
     }
 
     public static final class Ball {
@@ -75,19 +76,9 @@ public final class Constants {
         public static final Rotation2d HATCH_REF_1_ANGLE_ACTUAL = Rotation2d.fromDegrees(0.0);
         public static final Rotation2d HATCH_REF_2_ANGLE_ACTUAL = Rotation2d.fromDegrees(0.0);
 
-        public static final double HATCH_M;
-        public static final double HATCH_B;
         public static final Rotation2d HATCH_HOME = Rotation2d.fromDegrees(10);
         public static final Rotation2d INTAKE_POSITON = Rotation2d.fromDegrees(100);
-
-        static {
-            HATCH_M =
-                (HATCH_REF_2_ANGLE_ACTUAL.getRotations() - HATCH_REF_1_ANGLE_ACTUAL.getRotations())
-                    / (HATCH_REF_2_ANGLE_MEASURED.getRotations()
-                        - HATCH_REF_1_ANGLE_MEASURED.getRotations());
-            HATCH_B = HATCH_REF_1_ANGLE_ACTUAL.getRotations()
-                - HATCH_REF_1_ANGLE_MEASURED.getRotations() * HATCH_M;
-        }
     }
 }
+
 
