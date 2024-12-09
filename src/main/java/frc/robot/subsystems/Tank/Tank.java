@@ -36,11 +36,11 @@ public class Tank extends SubsystemBase {
     }
 
     public void setPIDVoltage(double leftSetPoint, double rightSetPoint) {
-        double pidL =
-            tankPidControllerL.calculate(inputs.tankLeftLeadVelocity * Constants.Tank.MAX_SPEED);
-        double pidR =
-            tankPidControllerR.calculate(inputs.tankRightLeadVelocity * Constants.Tank.MAX_SPEED);
+        double pidL = tankPidControllerL.calculate(leftSetPoint * Constants.Tank.MAX_SPEED);
+        double pidR = tankPidControllerR.calculate(rightSetPoint * Constants.Tank.MAX_SPEED);
         setVolatge(pidL, pidR);
+        Logger.recordOutput("Tank/pidL", pidL);
+        Logger.recordOutput("Tank/rightPower", pidR);
     }
 
     public Command tankCMD(CommandXboxController driver) {
