@@ -10,18 +10,20 @@ public interface TankIO {
          * right motor data
          */
         public double tankRightLeadVelocity;
+        public double tankRightPosition;
 
         /**
          * left motor data
          */
         public double tankLeftLeadVelocity;
+        public double tankleftPosition;
 
         /**
          * gyro data
          */
-        public static float yaw;
-        public static float pitch;
-        public static float roll;
+        public float yaw;
+        public float pitch;
+        public float roll;
     }
 
     public default void updateInputs(TankIOInputs inputs) {}

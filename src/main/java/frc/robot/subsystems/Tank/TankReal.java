@@ -6,7 +6,6 @@ import com.ctre.phoenix6.controls.StrictFollower;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.math.geometry.Rotation2d;
 import frc.robot.Constants;
 
 public class TankReal implements TankIO {
@@ -21,6 +20,9 @@ public class TankReal implements TankIO {
     private final AHRS gyro = new AHRS(Constants.Tank.navXID);
     private final StatusSignal<Double> tankRightLeadVelocity;
     private final StatusSignal<Double> tankLeftLeadVelocity;
+    private final StatusSignal<Double> tankLeftPosition;
+    private final StatusSignal<Double> tankRightPositon;
+
 
     public TankReal() {
         /**
@@ -34,6 +36,8 @@ public class TankReal implements TankIO {
          */
         tankRightLeadVelocity = tankFrontRightLead.getVelocity();
         tankLeftLeadVelocity = tankFrontLeftLead.getVelocity();
+        tankLeftPosition = tankFrontLeftLead.getPosition();
+        tankRightPositon = tankFrontRightLead.getPosition();
 
         /**
          * sets motor to netural mode
@@ -50,11 +54,6 @@ public class TankReal implements TankIO {
     }
 
     @Override
-
-    public Rotation2d getRotation2d() {
-        return gyro.getRotation2d();
-    }
-
     /**
      * sets motor power
      */
@@ -78,11 +77,14 @@ public class TankReal implements TankIO {
          */
         inputs.tankRightLeadVelocity = tankRightLeadVelocity.getValueAsDouble();
         inputs.tankLeftLeadVelocity = tankLeftLeadVelocity.getValueAsDouble();
+        inputs.tankleftPosition = tankRightPositon.getValueAsDouble();
+        inputs.tankRightPosition = tankRightPositon.getValueAsDouble();
 
         /**
          * refreshs motor data
          */
-        BaseStatusSignal.refreshAll(tankRightLeadVelocity, tankLeftLeadVelocity);
+        BaseStatusSignal.refreshAll(tankRightLeadVelocity, tankLeftLeadVelocity, tankRightPositon,
+            tankRightPositon);
     }
 
 
