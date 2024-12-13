@@ -76,8 +76,8 @@ public class TankReal implements TankIO {
         /**
          * gets motor data
          */
-        inputs.tankRightLeadVelocityRadPerSec = tankRightLeadVelocity.getValueAsDouble();
-        inputs.tankLeftLeadVelocityRadPerSec = tankLeftLeadVelocity.getValueAsDouble();
+        inputs.tankRightLeadVelocity = tankRightLeadVelocity.getValueAsDouble();
+        inputs.tankLeftLeadVelocity = tankLeftLeadVelocity.getValueAsDouble();
 
         /**
          * refreshs motor data
