@@ -6,6 +6,7 @@ import com.ctre.phoenix6.controls.StrictFollower;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.math.geometry.Rotation2d;
 import frc.robot.Constants;
 
 public class TankReal implements TankIO {
@@ -49,6 +50,11 @@ public class TankReal implements TankIO {
     }
 
     @Override
+
+    public Rotation2d getRotation2d() {
+        return gyro.getRotation2d();
+    }
+
     /**
      * sets motor power
      */
@@ -78,4 +84,6 @@ public class TankReal implements TankIO {
          */
         BaseStatusSignal.refreshAll(tankRightLeadVelocity, tankLeftLeadVelocity);
     }
+
+
 }
