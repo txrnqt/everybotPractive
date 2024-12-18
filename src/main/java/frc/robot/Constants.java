@@ -1,6 +1,9 @@
 package frc.robot;
 
+import java.beans.IntrospectionException;
+import javax.swing.plaf.basic.BasicComboBoxUI.FocusHandler;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.units.UnitBuilder;
 
 /**
  * Constants file.
@@ -45,6 +48,19 @@ public final class Constants {
         public static final double TANK_KI = 0.0;
         public static final double TANK_KD = 0.0;
         public static final double MAX_SPEED = 0.0;
+
+        public class sim {
+            public static final int LEFTLEAD = 1;
+            public static final int LEFT = 1;
+            public static final int RIGHTLEAD = 1;
+            public static final int RIGHT = 1;
+
+            /** gear ratios */
+            public static final double LEFTLEADGEAR = 3;
+            public static final double LEFTGEAR = 3;
+            public static final double RIGHTLEADGEAR = 3;
+            public static final double RIGHTGEAR = 3;
+        }
     }
 
     public static final class Ball {
