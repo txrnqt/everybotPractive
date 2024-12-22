@@ -1,7 +1,9 @@
 package frc.robot;
 
 import java.beans.IntrospectionException;
+import javax.imageio.plugins.tiff.FaxTIFFTagSet;
 import javax.swing.plaf.basic.BasicComboBoxUI.FocusHandler;
+import org.apache.http.client.utils.Punycode;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.units.UnitBuilder;
 
@@ -49,6 +51,11 @@ public final class Constants {
         public static final double TANK_KD = 0.0;
         public static final double MAX_SPEED = 0.0;
 
+        /** feed forward */
+        public static final double TANK_KVL = 0.0;
+        public static final double TANK_KAL = 0.0;
+        public static final double TANK_KVA = 0.0;
+        public static final double TANK_KAA = 0.0;
         public class sim {
             public static final int LEFTLEAD = 1;
             public static final int LEFT = 1;

@@ -2,7 +2,6 @@ package frc.robot.subsystems.Tank;
 
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.FlywheelSim;
-import frc.lib.math.sim.SimulatedBot;
 import frc.robot.Constants;
 
 public class TankSim implements TankIO {
@@ -19,6 +18,6 @@ public class TankSim implements TankIO {
     private double leftAppliedVolts;
     private double rightAppliedVolts;
 
-    private final SimulatedBot sim;
+    // private final SimulatedBot sim;
 
 }

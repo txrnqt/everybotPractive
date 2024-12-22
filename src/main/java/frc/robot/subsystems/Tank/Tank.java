@@ -3,6 +3,7 @@ package frc.robot.subsystems.Tank;
 
 import org.littletonrobotics.junction.Logger;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -16,6 +17,13 @@ public class Tank extends SubsystemBase {
     private DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(
         new Rotation2d(inputs.yaw), inputs.tankleftPosition, inputs.tankRightPosition);
 
+
+    PIDController tankPidControllerL =
+        new PIDController(Constants.Tank.TANK_KP, Constants.Tank.TANK_KI, Constants.Tank.TANK_KD);
+    PIDController tankPidControllerR =
+        new PIDController(Constants.Tank.TANK_KP, Constants.Tank.TANK_KI, Constants.Tank.TANK_KD);
+
+
     public Tank(TankIO tankIO) {
         this.io = tankIO;
         io.updateInputs(inputs);
@@ -28,12 +36,6 @@ public class Tank extends SubsystemBase {
         odometry.update(new Rotation2d(inputs.yaw), inputs.tankleftPosition,
             inputs.tankRightPosition);
     }
-
-    PIDController tankPidControllerL =
-        new PIDController(Constants.Tank.TANK_KP, Constants.Tank.TANK_KI, Constants.Tank.TANK_KD);
-
-    PIDController tankPidControllerR =
-        new PIDController(Constants.Tank.TANK_KP, Constants.Tank.TANK_KI, Constants.Tank.TANK_KD);
 
     public void setVolatge(double leftV, double rightV) {
         Logger.recordOutput("Tank/leftPower", leftV);
@@ -49,10 +51,23 @@ public class Tank extends SubsystemBase {
         Logger.recordOutput("Tank/rightPower", pidR);
     }
 
+    public void setProfiledVoltage(double left, double right) {}
+
     public Command tankCMD(CommandXboxController driver) {
         return run(() -> {
             setPIDVoltage(driver.getLeftY(), driver.getRightY());
         });
     }
+
+    public Pose2d getPose() {
+        return odometry.getPoseMeters();
+    }
+
+    // public void choreoController(Pose2d curPose, DifferentialSample sample) {
+    // ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(new
+    // ChassisSpeeds(tankPidControllerL.calculate(curPose.getX(), sample.x)+ sample.vx,
+    // tankPidControllerR.calculate(curPose.getY(), sample.y) + sample.vy,
+    // thetaController, null)
+    // }
 }
 
